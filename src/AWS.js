@@ -47,6 +47,7 @@ class AWSConfig {
   downloadFileList = (setFiles) => {
     this.myBucket.listObjects((err, list) => {
       if (err) return console.log(err);
+      console.log(list);
       setFiles(list.Contents);
     });
   };

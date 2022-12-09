@@ -7,10 +7,10 @@ const S3Download = ({ AWS }) => {
   const [files, setFiles] = useState([]);
   //   const imgRef = useRef();
 
-  //   const accessKeyId = "AKIAYBPRHC5LSZLMDFGF";
-  //   const secretAccessKey = "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";
-  //   const REGION = "ap-northeast-2";
-  //   const S3_BUCKET = "sasm-aws-s3-test";
+  //   const accessKeyId = `${import.meta.env.VITE_accessKeyId}`;
+  //   const secretAccessKey = `${import.meta.env.VITE_secretAccessKey}`;
+  //   const REGION = `${import.meta.env.VITE_REGION}`;
+  //   const S3_BUCKET = `${import.meta.env.VITE_S3_BUCKET}`;
 
   //   AWS.config.update({
   //     credentials: {

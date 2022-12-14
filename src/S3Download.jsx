@@ -5,7 +5,7 @@ import { Row, Col, Button, Input, Alert } from "reactstrap";
 
 const S3Download = ({ AWS }) => {
   const [files, setFiles] = useState([]);
-  //   const imgRef = useRef();
+  const imgRef = useRef();
 
   //   const accessKeyId = `${import.meta.env.VITE_accessKeyId}`;
   //   const secretAccessKey = `${import.meta.env.VITE_secretAccessKey}`;
@@ -81,7 +81,7 @@ const S3Download = ({ AWS }) => {
           <Row key={file.Key}>
             <Col>
               <div
-                onClick={(e) => AWS.downloadFileObject(e)}
+                onClick={(e) => AWS.downloadFileObject(e, imgRef)}
                 className="File-Object"
               >
                 {file.Key}
@@ -90,9 +90,9 @@ const S3Download = ({ AWS }) => {
           </Row>
         ))}
       </div>
-      {/* <div className="imgBox">
+      <div className="imgBox">
         <img ref={imgRef} />
-      </div> */}
+      </div>
     </div>
   );
 };

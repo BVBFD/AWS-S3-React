@@ -7,16 +7,17 @@ class AWSConfig {
     this.REGION = REGION;
     this.S3_BUCKET = S3_BUCKET;
 
-    this.myBucket = new AWS.S3({
-      params: { Bucket: this.S3_BUCKET },
-      region: this.REGION,
-    });
-
     AWS.config.update({
       credentials: {
         accessKeyId: this.accessKeyId,
         secretAccessKey: this.secretAccessKey,
       },
+    });
+    // AWS Config Update를 먼저 해주어야 에러가 나지 않음!!
+
+    this.myBucket = new AWS.S3({
+      params: { Bucket: this.S3_BUCKET },
+      region: this.REGION,
     });
   }
 
@@ -52,7 +53,7 @@ class AWSConfig {
     });
   };
 
-  downloadFileObject = (e) => {
+  downloadFileObject = (e, imgRef) => {
     const fileName = e.target.innerText;
     const params = { Bucket: this.S3_BUCKET, Key: fileName };
     this.myBucket.getObject(params, (err, data) => {
@@ -63,15 +64,16 @@ class AWSConfig {
         const imgUrl = URL.createObjectURL(
           new Blob([data.Body.buffer], { type: "image/jpg" })
         );
+        console.log(imgUrl);
         // HTML에 뜨게하기
-        // imgRef.current.src = imgUrl;
+        imgRef.current.src = imgUrl;
 
         // 다운로드 창 뜨게하기
-        let hiddenElement = document.createElement("a");
-        hiddenElement.href = "data:attachment/text," + imgUrl;
-        hiddenElement.target = "_blank";
-        hiddenElement.download = `${fileName}.jpg`;
-        hiddenElement.click();
+        // let hiddenElement = document.createElement("a");
+        // hiddenElement.href = "data:attachment/text," + imgUrl;
+        // hiddenElement.target = "_blank";
+        // hiddenElement.download = `${fileName}.jpg`;
+        // hiddenElement.click();
       }
     });
   };
